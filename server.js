@@ -5,6 +5,7 @@ const cors = require("cors");
 
 // internal import
 const authRoute = require("./routes/user.route");
+require("./config/database.config");
 
 const app = express();
 
@@ -13,17 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const port = process.env.PORT;
-const dbURL = process.env.MONGODB_URL;
-
-try {
-  mongoose.connect(dbURL);
-
-  console.log("database is connected");
-} catch (error) {
-  console.log("database is not connected");
-  console.log(error);
-  process.exit(1);
-}
 
 app.get("/", (req, res) => {
   res.send("hello world");
